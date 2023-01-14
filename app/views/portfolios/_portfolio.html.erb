@@ -1,4 +1,7 @@
 <div id="<%= dom_id portfolio %>">
+  
+  <%= image_tag portfolio.thumb_image unless portfolio.thumb_image.nil? %>
+
   <p>
     <strong>Title:</strong>
     <%= portfolio.title %>
