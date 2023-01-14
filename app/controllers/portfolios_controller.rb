@@ -11,19 +11,34 @@ class PortfoliosController < ApplicationController
     @portfolio_item = Portfolio.find(params[:id])
   end
 
+  def edit
+    @portfolio_item = Portfolio.find(params[:id])
+  end
+
   def create
     @portfolio_item = Portfolio.new(params.require(:portfolio).permit(:title, :subtitle, :body))
 
     respond_to do |format|
       if @portfolio_item.save
         format.html { redirect_to portfolio_url(@portfolio_item), notice: "Portfolio Item was successfully created." }
-        format.json { render :show, status: :created, location: @portfolio_item }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @portfolio_item.errors, status: :unprocessable_entity }
       end
     end
   end
+
+  def update
+    @portfolio_item = Portfolio.find(params[:id])
+
+    respond_to do |format|
+      if @portfolio_item.update(params.require(:portfolio).permit(:title, :subtitle, :body))
+        format.html { redirect_to portfolios_url, notice: "Portfolio Item was successfully updated." }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+      end
+    end
+  end
+
 
   # private
     # Use callbacks to share common setup or constraints between actions.
