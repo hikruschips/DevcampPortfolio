@@ -4,10 +4,20 @@
 
 <div id="blogs">
   <% @blogs.each do |blog| %>
-    <%= render blog %>
-    <p>
-      <%= link_to "Show this blog", blog %>
-    </p>
+    <div id="<%= dom_id blog %>">
+      <p>
+        <strong>Title:</strong>
+        <%= link_to blog.title, blog %>
+      </p>
+
+      <p>
+        <strong>Body:</strong>
+        <%= blog.body %>
+      </p>
+
+      <%= link_to blog.status, toggle_status_blog_path(blog) %>
+
+    </div>
   <% end %>
 </div>
 
